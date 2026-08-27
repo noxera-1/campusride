@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book a Ride | Campus Ride</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="page-bg">
+
+<section class="booking-section">
+
+    <div class="booking-container">
+
+        <h1>Book Your Ride</h1>
+
+        <form id="bookingForm">
+
+            <input type="text" id="name" placeholder="Full Name" required>
+
+<input type="tel" id="phone" placeholder="Phone Number" required>
+
+<input type="text" id="pickup" placeholder="Pickup Location" required>
+
+<input type="text" id="destination" placeholder="Destination" required>
+
+<select id="count" required>
+
+    <option value="">Passenger Count</option>
+
+    <option>1</option>
+
+    <option>2</option>
+
+    <option>3</option>
+    <option>more than 3</option>
+
+</select>
+<select id="vehicle" required>
+
+    <option value="">Select Vehicle</option>
+
+    <option>Toyota Corolla</option>
+
+    <option>Toyota Camry</option>
+
+</select>
+
+<input type="datetime-local" id="rideDate" optional>
+
+<textarea
+
+    id="notes"
+
+    placeholder="Additional Notes (Optional)"
+
+    rows="5"></textarea>
+
+
+            <button type="submit">
+
+                Request Ride
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+<script src="js/script.js"></script>
+</body>
+
+</html>
