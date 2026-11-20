@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c5f33">
+
+    <title>Driver Portal | Campus Ride</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f7f8f7;
+        }
+
+        .driver-page {
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        .driver-container {
+            max-width: 680px;
+            margin: auto;
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #0c5f33;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        h1 {
+            color: #0c5f33;
+        }
+
+        h2 {
+            color: #35251f;
+            margin-top: 25px;
+        }
+
+        .intro {
+            color: #786a60;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #35251f;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #16a34a;
+        }
+
+        input[type="file"] {
+            background: #fafafa;
+        }
+
+        .file-help {
+            display: block;
+            color: #786a60;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #0c5f33;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .secondary-button {
+            margin-top: 10px;
+            background: #35251f;
+        }
+
+        .secondary-button:hover {
+            background: #554037;
+        }
+
+        .divider {
+            margin: 30px 0;
+            border-top: 1px solid #eee;
+        }
+
+        #applicationForm,
+        #logoutBtn {
+            display: none;
+        }
+
+        #driverMessage {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .status-box {
+            padding: 15px;
+            background: #f1f8f3;
+            border-left: 4px solid #0c5f33;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .driver-container {
+                padding: 25px 20px;
+            }
+
+            .driver-page {
+                padding: 25px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="driver-page">
+
+    <div class="driver-container">
+
+        <a href="index.html" class="back-home">
+            ← Back to Campus Ride
+        </a>
+
+        <h1>Driver Portal</h1>
+
+        <p class="intro">
+            Want to be a campus ride driver?
+            Create your account, submit your details and get approved.
+        </p>
+
+        <!-- ACCOUNT SECTION -->
+
+        <div id="authSection">
+
+            <h2>Driver Account</h2>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="At least 6 characters">
+            </div>
+
+            <button type="button" id="signupBtn">Create Account</button>
+
+            <button type="button" id="loginBtn" class="secondary-button">
+                Login
+            </button>
+
+        </div>
+
+        <!-- APPLICATION FORM -->
+
+        <form id="applicationForm">
+
+            <div class="divider"></div>
+
+            <h2>Driver Application</h2>
+
+            <p class="intro">
+                Complete your information and upload the required documents.
+                Each driver can register one vehicle.
+            </p>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicleType">Vehicle Type</label>
+
+                <select id="vehicleType" required>
+                    <option value="">Select vehicle</option>
+                    <option value="Toyota Corolla">Toyota Corolla</option>
+                    <option value="Toyota Camry">Toyota Camry</option>
+                    <option value="Honda Accord">Honda Accord</option>
+                    <option value="Lexus">Lexus</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plateNumber">Vehicle Plate Number</label>
+                <input type="text" id="plateNumber" required>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Required Documents</h2>
+
+            <div class="form-group">
+                <label for="driversLicense">Driver's Licence</label>
+                <input
+                    type="file"
+                    id="driversLicense"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    required
+                >
+                <small class="file-help">PDF, JPG or PNG. Maximum 5MB.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicleDocument">Vehicle Registration Document</label>
+                <input
+                    type="file"
+                    id="vehicleDocument"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    required
+                >
+                <small class="file-help">PDF, JPG or PNG. Maximum 5MB.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="vehiclePhoto">Vehicle Photograph</label>
+                <input
+                    type="file"
+                    id="vehiclePhoto"
+                    accept=".jpg,.jpeg,.png,.webp"
+                    required
+                >
+                <small class="file-help">Upload a clear photograph of your vehicle. Maximum 5MB.</small>
+            </div>
+
+            <button type="submit" id="submitApplication">
+                Submit Application
+            </button>
+
+        </form>
+
+        <button type="button" id="logoutBtn" class="secondary-button">
+            Logout
+        </button>
+
+        <div id="driverMessage" aria-live="polite"></div>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/driver.js"></script>
+
+</body>
+</html>

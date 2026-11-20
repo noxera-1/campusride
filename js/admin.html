@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Campus Ride</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f4f6f4;
+            color: #35251f;
+        }
+
+        .admin-header {
+            background: #0c5f33;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-header h2 {
+            margin: 0;
+        }
+
+        .admin-header button,
+        .login-box button,
+        .action-button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .admin-header button {
+            background: #f5c842;
+            color: #35251f;
+        }
+
+        .admin-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .login-box {
+            max-width: 430px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .login-box h1 {
+            color: #0c5f33;
+        }
+
+        .login-box input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .login-box button {
+            width: 100%;
+            background: #0c5f33;
+            color: white;
+            margin-top: 10px;
+        }
+
+        #dashboard {
+            display: none;
+        }
+
+        .dashboard-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-heading h1 {
+            color: #0c5f33;
+        }
+
+        .dashboard-heading select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .application-card {
+            background: white;
+            padding: 25px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+
+        .application-card h3 {
+            color: #0c5f33;
+            margin-top: 0;
+        }
+
+        .application-details p {
+            margin: 9px 0;
+            font-size: 14px;
+        }
+
+        .document-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .document-links a {
+            color: #0c5f33;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #fff4d6;
+            color: #8a6200;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .approve-button {
+            background: #0c5f33;
+            color: white;
+        }
+
+        .reject-button {
+            background: #b42318;
+            color: white;
+        }
+
+        .action-button:disabled,
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #adminMessage {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .empty-message {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            color: #786a60;
+        }
+
+        @media(max-width: 600px) {
+            .admin-header {
+                padding: 18px;
+            }
+
+            .application-card {
+                padding: 18px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="admin-header">
+        <h2>Campus Ride Admin</h2>
+        <button id="logoutBtn" style="display:none;">Logout</button>
+    </header>
+
+    <!-- LOGIN -->
+
+    <section class="login-box" id="loginSection">
+
+        <h1>Admin Login</h1>
+        <p>Sign in to manage driver applications.</p>
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="adminEmail"
+                placeholder="Admin email"
+                required
+            >
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit" id="loginBtn">
+                Login
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- DASHBOARD -->
+
+    <main class="admin-container" id="dashboard">
+
+        <div class="dashboard-heading">
+            <div>
+                <h1>Driver Applications</h1>
+                <p>Review and manage driver registrations.</p>
+            </div>
+
+            <select id="statusFilter">
+                <option value="Pending">Pending Applications</option>
+                <option value="Approved">Approved Applications</option>
+                <option value="Rejected">Rejected Applications</option>
+                <option value="All">All Applications</option>
+            </select>
+        </div>
+
+        <div id="adminMessage" aria-live="polite"></div>
+
+        <div id="applicationsList"></div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+</html>
