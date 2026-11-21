@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Admin Dashboard | Campus Ride</title>
-
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
@@ -19,40 +20,34 @@
             color: #35251f;
         }
 
+        button,
+        select,
+        input {
+            font-family: inherit;
+        }
+
         .admin-header {
             background: #0c5f33;
             color: white;
-            padding: 20px 5%;
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
         }
 
         .admin-header h2 {
             margin: 0;
-        }
-
-        .admin-header button,
-        .login-box button,
-        .action-button {
-            border: none;
-            padding: 11px 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
+            font-size: 21px;
         }
 
         .admin-header button {
             background: #f5c842;
             color: #35251f;
-        }
-
-        .admin-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         .login-box {
@@ -61,7 +56,7 @@
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
         }
 
         .login-box h1 {
@@ -70,23 +65,81 @@
 
         .login-box input {
             width: 100%;
-            box-sizing: border-box;
             padding: 13px;
             margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-family: inherit;
         }
 
         .login-box button {
             width: 100%;
             background: #0c5f33;
             color: white;
+            border: none;
+            padding: 13px;
             margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         #dashboard {
             display: none;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: calc(100vh - 65px);
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #fff;
+            padding: 25px 15px;
+            border-right: 1px solid #e8e8e8;
+            flex-shrink: 0;
+        }
+
+        .sidebar h3 {
+            color: #0c5f33;
+            font-size: 14px;
+            padding-left: 12px;
+            margin-bottom: 25px;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            padding: 13px 12px;
+            margin-bottom: 7px;
+            border-radius: 6px;
+            color: #625a55;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .sidebar button:hover,
+        .sidebar button.active {
+            background: #eaf4ed;
+            color: #0c5f33;
+            font-weight: 600;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding: 35px;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
         }
 
         .dashboard-heading {
@@ -100,13 +153,39 @@
 
         .dashboard-heading h1 {
             color: #0c5f33;
+            margin: 0;
+            font-size: 25px;
         }
 
-        .dashboard-heading select {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
+        .dashboard-heading p {
+            color: #786a60;
+            font-size: 13px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 9px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card p {
+            color: #786a60;
+            font-size: 13px;
+            margin: 0 0 10px;
+        }
+
+        .stat-card h2 {
+            color: #0c5f33;
+            margin: 0;
+            font-size: 27px;
         }
 
         .application-card {
@@ -114,7 +193,7 @@
             padding: 25px;
             border-radius: 9px;
             margin-bottom: 20px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
         }
 
         .application-card h3 {
@@ -125,6 +204,7 @@
         .application-details p {
             margin: 9px 0;
             font-size: 14px;
+            overflow-wrap: anywhere;
         }
 
         .document-links {
@@ -154,6 +234,14 @@
             display: flex;
             gap: 12px;
             margin-top: 20px;
+        }
+
+        .action-button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         .approve-button {
@@ -186,9 +274,62 @@
             color: #786a60;
         }
 
+        .section-filter {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .coming-soon {
+            background: white;
+            padding: 35px;
+            border-radius: 9px;
+            text-align: center;
+            color: #786a60;
+        }
+
+        @media(max-width: 850px) {
+            .dashboard-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                display: flex;
+                gap: 7px;
+                overflow-x: auto;
+                padding: 12px;
+                border-right: none;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            .sidebar h3 {
+                display: none;
+            }
+
+            .sidebar button {
+                white-space: nowrap;
+                width: auto;
+                margin: 0;
+            }
+
+            .main-content {
+                padding: 22px;
+            }
+        }
+
         @media(max-width: 600px) {
             .admin-header {
-                padding: 18px;
+                padding: 16px;
+            }
+
+            .admin-header h2 {
+                font-size: 17px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
 
             .application-card {
@@ -202,75 +343,159 @@
             .action-button {
                 width: 100%;
             }
+
+            .main-content {
+                padding: 17px;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <header class="admin-header">
         <h2>Campus Ride Admin</h2>
         <button id="logoutBtn" style="display:none;">Logout</button>
     </header>
-
-    <!-- LOGIN -->
-
+    <!-- ADMIN LOGIN -->
     <section class="login-box" id="loginSection">
-
         <h1>Admin Login</h1>
-        <p>Sign in to manage driver applications.</p>
-
+        <p>Sign in to manage Campus Ride.</p>
         <form id="loginForm">
-
-            <input
-                type="email"
-                id="adminEmail"
-                placeholder="Admin email"
-                required
-            >
-
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Password"
-                required
-            >
-
+            <input type="email" id="adminEmail" placeholder="Admin email" required>
+            <input type="password" id="adminPassword" placeholder="Password" required>
             <button type="submit" id="loginBtn">
                 Login
             </button>
-
         </form>
-
     </section>
-
-    <!-- DASHBOARD -->
-
-    <main class="admin-container" id="dashboard">
-
-        <div class="dashboard-heading">
-            <div>
-                <h1>Driver Applications</h1>
-                <p>Review and manage driver registrations.</p>
-            </div>
-
-            <select id="statusFilter">
-                <option value="Pending">Pending Applications</option>
-                <option value="Approved">Approved Applications</option>
-                <option value="Rejected">Rejected Applications</option>
-                <option value="All">All Applications</option>
-            </select>
+    <!-- ADMIN DASHBOARD -->
+    <div id="dashboard">
+        <div class="dashboard-layout">
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <h3>MANAGEMENT</h3>
+                <button class="active" data-section="overviewSection">
+                    Overview
+                </button>
+                <button data-section="applicationsSection">
+                    Driver Applications
+                </button>
+                <button data-section="driversSection">
+                    Approved Drivers
+                </button>
+                <button data-section="ridesSection">
+                    Ride Bookings
+                </button>
+                <button data-section="fleetSection">
+                    Fleet Management
+                </button>
+            </aside>
+            <!-- MAIN CONTENT -->
+            <main class="main-content">
+                <div id="adminMessage" aria-live="polite"></div>
+                <!-- OVERVIEW -->
+                <section class="page-section active" id="overviewSection">
+                    <div class="dashboard-heading">
+                        <div>
+                            <h1>Dashboard Overview</h1>
+                            <p>Welcome to your Campus Ride management dashboard.</p>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <p>Driver Applications</p>
+                            <h2 id="totalApplications">—</h2>
+                        </div>
+                        <div class="stat-card">
+                            <p>Approved Drivers</p>
+                            <h2 id="totalDrivers">—</h2>
+                        </div>
+                        <div class="stat-card">
+                            <p>Ride Bookings</p>
+                            <h2 id="totalRides">—</h2>
+                        </div>
+                    </div>
+                    <div class="empty-message">
+                        Dashboard statistics will appear here once the data connection is added.
+                    </div>
+                </section>
+                <!-- DRIVER APPLICATIONS -->
+                <section class="page-section" id="applicationsSection">
+                    <div class="dashboard-heading">
+                        <div>
+                            <h1>Driver Applications</h1>
+                            <p>Review and manage driver registrations.</p>
+                        </div>
+                        <select id="statusFilter" class="section-filter">
+                            <option value="Pending">Pending Applications</option>
+                            <option value="Approved">Approved Applications</option>
+                            <option value="Rejected">Rejected Applications</option>
+                            <option value="All">All Applications</option>
+                        </select>
+                    </div>
+                    <div id="applicationsList"></div>
+                </section>
+                <!-- APPROVED DRIVERS -->
+                <section class="page-section" id="driversSection">
+                    <div class="dashboard-heading">
+                        <div>
+                            <h1>Approved Drivers</h1>
+                            <p>View drivers approved to operate on Campus Ride.</p>
+                        </div>
+                    </div>
+                    <div class="coming-soon">
+                        Approved driver records will appear here.
+                    </div>
+                </section>
+                <!-- RIDE BOOKINGS -->
+                <section class="page-section" id="ridesSection">
+                    <div class="dashboard-heading">
+                        <div>
+                            <h1>Ride Bookings</h1>
+                            <p>View and manage passenger ride requests.</p>
+                        </div>
+                    </div>
+                    <div id="ridesList" class="coming-soon">
+                        Passenger bookings will appear here once connected.
+                    </div>
+                </section>
+                <!-- FLEET MANAGEMENT -->
+                <section class="page-section" id="fleetSection">
+                    <div class="dashboard-heading">
+                        <div>
+                            <h1>Fleet Management</h1>
+                            <p>Manage vehicles available on the Campus Ride platform.</p>
+                        </div>
+                    </div>
+                    <div id="adminFleetList" class="coming-soon">
+                        Fleet management will appear here.
+                    </div>
+                </section>
+            </main>
         </div>
-
-        <div id="adminMessage" aria-live="polite"></div>
-
-        <div id="applicationsList"></div>
-
-    </main>
-
+    </div>
+    <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
     <script src="js/admin.js"></script>
-
+    <!-- DASHBOARD NAVIGATION -->
+    <script>
+        const sectionButtons = document.querySelectorAll(".sidebar button");
+        const pageSections = document.querySelectorAll(".page-section");
+        sectionButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const target = button.dataset.section;
+                sectionButtons.forEach(item => {
+                    item.classList.remove("active");
+                });
+                pageSections.forEach(section => {
+                    section.classList.remove("active");
+                });
+                button.classList.add("active");
+                document.getElementById(target).classList.add("active");
+            });
+        });
+    </script>
 </body>
+
 </html>
